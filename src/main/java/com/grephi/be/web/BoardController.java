@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,8 +40,14 @@ public class BoardController {
     }
 
     @PatchMapping("/board")
-    public BoardEntity update(@RequestBody BoardDto boardDto) {
-        return boardService.update(boardDto);
+    public BoardEntity update(@RequestBody BoardDto boardDto, @RequestPart MultipartFile imgUploadFile) {
+        boardService.uploadImageFile(boardDto, imgUploadFile);
+        if (boardDto.getIdx() == null) {
+            return boardService.create(boardDto);
+        } else {
+            return boardService.update(boardDto);
+        }
+//        return boardService.update(boardDto);
     }
 
     @DeleteMapping("/board/{id}")
