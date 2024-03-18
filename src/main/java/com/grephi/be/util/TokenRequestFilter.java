@@ -1,7 +1,7 @@
 package com.grephi.be.util;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.grephi.be.services.UserService;
+import com.grephi.be.services.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 public class TokenRequestFilter extends OncePerRequestFilter {
-    private final UserService userService;
+    private final CustomUserDetailService adminUserService;
     private final JwtUtil jwtUtil;
 
     @Override
@@ -38,7 +38,7 @@ public class TokenRequestFilter extends OncePerRequestFilter {
                     DecodedJWT tokenInfo = jwtUtil.decodeToken(token);
                     if (tokenInfo != null) {
                         String userId = tokenInfo.getClaim("userId").asString();
-                        UserDetails loginUser = userService.loadUserByUsername(userId);
+                        UserDetails loginUser = adminUserService.loadUserByUsername(userId);
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                                 loginUser, null, loginUser.getAuthorities()
                         );

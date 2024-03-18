@@ -18,12 +18,13 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     String secret;
 
-    public String createToken(String userId, String userName) {
+    public String createToken(String userId, String userName, String userLevel) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
                 .withIssuer("vue-board")
                 .withClaim("userId", userId)
                 .withClaim("userName", userName)
+                .withClaim("userLevel", userLevel)
                 .withIssuedAt(new Date())
                 .sign(algorithm);
     }

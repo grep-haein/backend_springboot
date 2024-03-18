@@ -1,6 +1,6 @@
 package com.grephi.be.config;
 
-import com.grephi.be.services.UserService;
+import com.grephi.be.services.CustomUserDetailService;
 import com.grephi.be.util.TokenRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserService userService;
+    private final CustomUserDetailService adminUserService;
     private final TokenRequestFilter tokenRequestFilter;
 
     @Bean
@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(adminUserService).passwordEncoder(passwordEncoder());
     }
 
     public void configure(HttpSecurity http) throws Exception {

@@ -21,8 +21,9 @@ class JwtUtilTest {
     void test_1(){
         String userId = "user1";
         String userName = "사용자1";
+        String userLevel = "7";
 
-        String token = jwtUtil.createToken(userId, userName);
+        String token = jwtUtil.createToken(userId, userName, userLevel);
 
         System.out.println("Token : " + token);
 
