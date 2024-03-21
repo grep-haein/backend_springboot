@@ -77,19 +77,18 @@ public class HaviService {
 //                .createdAt(entity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")))
 //                .build();
 //    }
-//
-//    /**
-//     * 게시글 등록
-//     */
-//    public BoardEntity create(BoardDto boardDto) {
-//        BoardEntity entity = BoardEntity.builder()
-//                .title(boardDto.getTitle())
-//                .contents(boardDto.getContents())
-//                .author(boardDto.getAuthor())
-//                .createdAt(LocalDateTime.now())
-//                .build();
-//        return boardRepository.save(entity);
-//    }
+
+    /**
+     * 습관 등록
+     */
+    public HaviEntity create(HaviDto boardDto) {
+        HaviEntity entity = HaviEntity.builder()
+                .havi_name(boardDto.getHavi_name())
+                .havi_description(boardDto.getHavi_description())
+                .build();
+        List<HaviEntity> dtos = new ArrayList<>();
+        return haviRepository.save(entity);
+    }
 //
 //    /**
 //     * 게시글 수정
