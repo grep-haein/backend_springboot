@@ -65,18 +65,19 @@ public class HaviService {
     }
 
     /**
-     * 게시글 가져오기
+     * 등록된 습관 가져오기
      */
-//    public BoardDto getBoard(Long id) {
-//        BoardEntity entity = boardRepository.findById(id).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
-//        return BoardDto.builder()
-//                .idx(entity.getIdx())
-//                .title(entity.getTitle())
-//                .contents(entity.getContents())
-//                .author(entity.getAuthor())
-//                .createdAt(entity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")))
-//                .build();
-//    }
+    public HaviDto getHaviDetail(Integer sno) {
+        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        return HaviDto.builder()
+                .sno(entity.getSno())
+                .havi_name(entity.getHavi_name())
+                .havi_description(entity.getHavi_description())
+                .havi_status(entity.getHavi_status())
+                .havi_start_date(entity.getHavi_start_date())
+                .havi_end_date(entity.getHavi_end_date())
+                .build();
+    }
 
     /**
      * 습관 등록
@@ -100,13 +101,13 @@ public class HaviService {
 //        return boardRepository.save(entity);
 //    }
 //
-//    /**
-//     * 게시글 삭제
-//     */
-//    public void delete(Long id) {
-//        BoardEntity entity = boardRepository.findById(id).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
-//        boardRepository.delete(entity);
-//    }
+    /**
+     * 게시글 삭제
+     */
+    public void delete(Integer sno) {
+        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        haviRepository.delete(entity);
+    }
 //
 //    /**
 //     * 이미지 업로드
