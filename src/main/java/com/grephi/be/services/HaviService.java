@@ -90,17 +90,16 @@ public class HaviService {
         List<HaviEntity> dtos = new ArrayList<>();
         return haviRepository.save(entity);
     }
-//
-//    /**
-//     * 게시글 수정
-//     */
-//    public BoardEntity update(BoardDto boardDto) {
-//        BoardEntity entity = boardRepository.findById(boardDto.getIdx()).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
-//        entity.setTitle(boardDto.getTitle());
-//        entity.setContents(boardDto.getContents());
-//        return boardRepository.save(entity);
-//    }
-//
+
+    /**
+     * 습관 수정
+     */
+    public HaviEntity update(HaviDto haviDto) {
+        HaviEntity entity = haviRepository.findById(haviDto.getSno()).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        entity.setHavi_description(haviDto.getHavi_description());
+        return haviRepository.save(entity);
+    }
+
     /**
      * 게시글 삭제
      */
