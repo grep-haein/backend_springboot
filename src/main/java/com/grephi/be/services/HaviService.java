@@ -68,7 +68,7 @@ public class HaviService {
      * 등록된 습관 가져오기
      */
     public HaviDto getHaviDetail(Integer sno) {
-        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("습관을 찾을 수 없습니다."));
         return HaviDto.builder()
                 .sno(entity.getSno())
                 .havi_name(entity.getHavi_name())
@@ -95,16 +95,25 @@ public class HaviService {
      * 습관 수정
      */
     public HaviEntity update(HaviDto haviDto) {
-        HaviEntity entity = haviRepository.findById(haviDto.getSno()).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        HaviEntity entity = haviRepository.findById(haviDto.getSno()).orElseThrow(() -> new RuntimeException("습관을 찾을 수 없습니다."));
         entity.setHavi_description(haviDto.getHavi_description());
         return haviRepository.save(entity);
     }
 
     /**
-     * 게시글 삭제
+     * 습관 체크
+     */
+    public HaviEntity checkHavi(HaviDto haviDto) {
+        HaviEntity entity = haviRepository.findById(haviDto.getSno()).orElseThrow(() -> new RuntimeException("습관을 찾을 수 없습니다."));
+        entity.setHavi_description(haviDto.getHavi_description());
+        return haviRepository.save(entity);
+    }
+
+    /**
+     * 습관 삭제
      */
     public void delete(Integer sno) {
-        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+        HaviEntity entity = haviRepository.findById(sno).orElseThrow(() -> new RuntimeException("습관을 찾을 수 없습니다."));
         haviRepository.delete(entity);
     }
 //

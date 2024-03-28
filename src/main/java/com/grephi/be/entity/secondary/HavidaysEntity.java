@@ -17,12 +17,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name="havi", catalog = "`godhavi`")
+@Table(name="havidays", catalog = "`godhavi`")
 @Entity
-public class HaviEntity implements Serializable {
+public class HavidaysEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sno;
+    private Integer havi_sno;
+    private String status;
+    @CreatedDate
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date havi_day;
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime created_date;
@@ -30,14 +35,4 @@ public class HaviEntity implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd/HH:mm:ss")
     private LocalDateTime updated_date;
     private LocalDateTime deleted_date;
-    private String havi_name;
-    private String havi_description;
-    @Column(columnDefinition = "boolean default 0")
-    private Boolean havi_status;
-    @CreatedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date havi_start_date;
-    private Date havi_end_date;
-    private Boolean delete_yn;
-    private Integer user_sno;
 }
